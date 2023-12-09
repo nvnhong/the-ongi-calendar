@@ -3,8 +3,11 @@ import Header from "@components/common/Header";
 import TextBox from "@components/common/TextBox";
 import WeekDays from "@components/calendar/Weekdays";
 import DateCell from "@components/calendar/DateCell";
+import HStack from "@components/common/HStack";
 import { useParams } from "react-router-dom";
 import { getMonthDate, getMonthDetails } from "@utils/dateUtil";
+import { isCookie as isLogin } from "@utils/cookieUtil";
+import { Button } from "@mui/material";
 
 export default function MonthPage() {
   const param = useParams();
@@ -15,9 +18,18 @@ export default function MonthPage() {
     <Layout>
       <Header />
 
-      <TextBox className="px-4 font-semibold">
-        2024년 {monthDetails.month}월
-      </TextBox>
+      <HStack className="justify-between items-center px-4">
+        <TextBox className="font-semibold">
+          2024년 {monthDetails.month}월
+        </TextBox>
+
+        {isLogin() && (
+          <HStack className="gap-2">
+            <Button variant="contained">소망 작성</Button>
+            <Button variant="contained">이미지 업로드</Button>
+          </HStack>
+        )}
+      </HStack>
 
       {/* 요일 표시 */}
       <WeekDays />
