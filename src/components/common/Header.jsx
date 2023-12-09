@@ -11,7 +11,9 @@ export default function Header() {
 
       {isLogin() ? (
         <div>
-          <AccountCircleRoundedIcon className="w-[40px] h-[40px]" />
+          <Link to="/mypage">
+            <AccountCircleRoundedIcon className="w-[40px] h-[40px]" />
+          </Link>
         </div>
       ) : (
         <Link
