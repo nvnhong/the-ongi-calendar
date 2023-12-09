@@ -28,3 +28,10 @@ export const getMonthDate = (monthDetails) => {
 
   return dateArray;
 };
+
+export const getMonthAndDay = (value) => {
+  const date = new Date(value);
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  return { month, day };
+};

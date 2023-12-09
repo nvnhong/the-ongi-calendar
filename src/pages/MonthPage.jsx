@@ -4,7 +4,7 @@ import TextBox from "@components/common/TextBox";
 import WeekDays from "@components/calendar/Weekdays";
 import DateCell from "@components/calendar/DateCell";
 import HStack from "@components/common/HStack";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getMonthDate, getMonthDetails } from "@utils/dateUtil";
 import { isCookie as isLogin } from "@utils/cookieUtil";
 import { Button } from "@mui/material";
@@ -25,7 +25,9 @@ export default function MonthPage() {
 
         {isLogin() && (
           <HStack className="gap-2">
-            <Button variant="contained">소망 작성</Button>
+            <Button variant="contained">
+              <Link to="/post">소망 작성</Link>
+            </Button>
             <Button variant="contained">이미지 업로드</Button>
           </HStack>
         )}

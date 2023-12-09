@@ -8,5 +8,5 @@ export default function useInput(initialState) {
     setValues((prevValues) => ({ ...prevValues, [name]: value }));
   };
 
-  return { values, handleChange };
+  return { values, setValues, handleChange };
 }
