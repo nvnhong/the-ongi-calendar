@@ -2,6 +2,7 @@ import Layout from "@components/common/Layout";
 import TextBox from "@components/common/TextBox";
 import useInput from "@hooks/useInput";
 import useLoginMutation from "@hooks/useLoginMutation";
+import VStack from "@components/common/VStack";
 import { Person, PhoneAndroid } from "@mui/icons-material";
 import { Button, InputAdornment, TextField } from "@mui/material";
 import { validateName, validatePhone } from "@utils/validationUtil";
@@ -19,7 +20,7 @@ export default function LoginPage() {
 
   return (
     <Layout>
-      <div className="h-screen flex flex-col justify-center gap-5 px-4">
+      <VStack className="h-screen justify-center gap-5 px-4">
         <TextBox className="text-[20px] text-center font-bold">
           더온기 캘린더 로그인
         </TextBox>
@@ -80,7 +81,7 @@ export default function LoginPage() {
         >
           이전 페이지로 돌아가기
         </TextBox>
-      </div>
+      </VStack>
     </Layout>
   );
 }
