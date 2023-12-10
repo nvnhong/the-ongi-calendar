@@ -6,9 +6,11 @@ import List from "@components/common/List";
 import { useQueries } from "@tanstack/react-query";
 import { getUserInfo, getUserPost, logout } from "@api/userApi";
 import { Button } from "@mui/material";
-import Loading from "../components/common/Loading";
+import Loading from "@components/common/Loading";
+import { useNavigate } from "react-router-dom";
 
 export default function MyPage() {
+  const navigate = useNavigate();
   const quries = useQueries({
     queries: [
       { queryKey: ["user"], queryFn: getUserInfo },
@@ -46,7 +48,11 @@ export default function MyPage() {
 
       <VStack className="mx-1">
         {userPost.map((data) => (
-          <List key={data.id} value={data} />
+          <List
+            key={data.id}
+            value={data}
+            onListClick={() => navigate(`/post/${data.id}`, { state: data })}
+          />
         ))}
       </VStack>
     </Layout>
