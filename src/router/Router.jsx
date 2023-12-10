@@ -16,5 +16,6 @@ export const router = createBrowserRouter([
   },
   { path: "login", element: <LoginPage /> },
   { path: "post", element: <PostPage /> },
+  { path: "post/:postId", element: <PostPage /> },
   { path: "mypage", element: <MyPage /> },
 ]);
