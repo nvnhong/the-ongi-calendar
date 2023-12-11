@@ -1,6 +1,6 @@
 import HStack from "@components/common/HStack";
 import TextBox from "@components/common/TextBox";
-import { LeftArrow, RightArrow } from "@assets/icon";
+import { LeftArrow, RightArrow } from "@assets/Icon";
 import { Link } from "react-router-dom";
 
 export default function Month({ month }) {
