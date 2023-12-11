@@ -30,7 +30,7 @@ export default function LoginPage() {
           error={validateName(values.username)}
           helperText={
             validateName(values.username) &&
-            "이름은 3글자 이상 한글로 입력해주세요"
+            "이름은 2글자 이상 한글로 입력해주세요"
           }
           name="username"
           value={values.username}
