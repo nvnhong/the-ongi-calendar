@@ -1,11 +1,11 @@
 import Layout from "@components/common/Layout";
 import TextBox from "@components/common/TextBox";
+import VStack from "@components/common/VStack";
 import useInput from "@hooks/useInput";
 import useLoginMutation from "@hooks/useLoginMutation";
-import VStack from "@components/common/VStack";
+import { validateName, validatePhone } from "@utils/validationUtil";
 import { Person, PhoneAndroid } from "@mui/icons-material";
 import { Button, InputAdornment, TextField } from "@mui/material";
-import { validateName, validatePhone } from "@utils/validationUtil";
 import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
