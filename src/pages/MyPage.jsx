@@ -43,7 +43,7 @@ export default function MyPage() {
       </VStack>
 
       <TextBox className="py-3 flex justify-center items-center font-semibold bg-gray-100 my-1">
-        {`작성한 소망 갯수 ${userPost.length} / 5개`}
+        {`작성한 소망 개수 ${userPost.length} / 5개`}
       </TextBox>
 
       <VStack className="mx-1">

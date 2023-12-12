@@ -11,8 +11,9 @@ export default function Header() {
 
       {isLogin() ? (
         <div>
-          <Link to="/mypage">
+          <Link to="/mypage" className="flex gap-1 items-center font-semibold">
             <AccountCircleRoundedIcon className="w-[40px] h-[40px]" />
+            MY
           </Link>
         </div>
       ) : (
