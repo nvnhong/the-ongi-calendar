@@ -1,52 +1,50 @@
-import Layout from "@components/common/Layout";
-import Header from "@components/common/Header";
-import HStack from "@components/common/HStack";
-import VStack from "@components/common/VStack";
-import TextBox from "@components/common/TextBox";
-import Loading from "@components/common/Loading";
-import Month from "@components/calendar/Month";
-import WeekDays from "@components/calendar/Weekdays";
-import DateCell from "@components/calendar/DateCell";
-import { Link, useParams } from "react-router-dom";
+import Common from "@components/common";
+import Calendar from "@components/calendar";
+import DayPostsModal from "@components/Modal/DayPostsModal";
+import useModal from "@hooks/useModal";
+import useMonthlyPosts from "@hooks/useMonthlyPost";
 import { getMonthDate, getMonthDetails } from "@utils/dateUtil";
 import { isCookie as isLogin } from "@utils/cookieUtil";
 import { Button } from "@mui/material";
-import useMonthlyPosts from "@hooks/useMonthlyPost";
+import { Link, useParams } from "react-router-dom";
+import { useState } from "react";
 
 export default function MonthPage() {
   const param = useParams();
+  const dayPostsModal = useModal();
   const monthDetails = getMonthDetails(param.monthId);
   const monthDates = getMonthDate(monthDetails);
   const { monthlyPosts, isLoading } = useMonthlyPosts(monthDetails.month);
+  const [selectedDay, setSelectedDay] = useState(null);
 
   if (isLoading)
     return (
       <>
-        <Loading />
+        <Common.Loading />
       </>
     );
 
   return (
-    <Layout>
-      <Header />
+    <Common.Layout>
+      <Common.Header />
 
-      <HStack className="justify-between items-center px-4">
-        <Month month={monthDetails.month} />
+      <Common.HStack className="justify-between items-center px-4">
+        <Calendar.Month month={monthDetails.month} />
 
         {isLogin() && (
-          <HStack className="gap-2">
+          <Common.HStack className="gap-2">
             <Button variant="contained">
               <Link to="/post">소망 작성</Link>
             </Button>
             <Button variant="contained">
               <Link to="/photo">이미지 업로드</Link>
             </Button>
-          </HStack>
+          </Common.HStack>
         )}
-      </HStack>
+      </Common.HStack>
 
       {/* 요일 표시 */}
-      <WeekDays />
+      <Calendar.WeekDays />
 
       {/* 날짜 표시 */}
       <div className="grid grid-cols-7 border-t-[1px] border-l-[1px] border-[#f3f4f5]">
@@ -56,28 +54,40 @@ export default function MonthPage() {
           );
 
           return (
-            <DateCell
+            <Calendar.DateCell
               key={`date${index}`}
               date={date}
               isEventDay={isEventDay}
               currentDate={monthDetails.currentDate}
+              onClick={() => {
+                dayPostsModal.handleOpenModal();
+                setSelectedDay(date.getDate());
+              }}
             />
           );
         })}
       </div>
 
-      <VStack className="bg-gray-100 gap-2 m-4 p-2 rounded-lg text-[14px]">
-        <TextBox>
-          <span className="font-semibold">작성된 소망 총 갯수</span> :{" "}
+      <Common.VStack className="bg-gray-100 gap-2 m-4 p-2 rounded-lg text-[14px]">
+        <Common.TextBox>
+          <span className="font-semibold">이달의 소망 갯수</span> :{" "}
           {monthlyPosts.length}개
-        </TextBox>
+        </Common.TextBox>
         {monthlyPosts.length > 0 && (
-          <TextBox>
+          <Common.TextBox>
             <span className="font-semibold">최근 등록된 소망</span> :{" "}
             {monthlyPosts[monthlyPosts.length - 1].contents}
-          </TextBox>
+          </Common.TextBox>
         )}
-      </VStack>
-    </Layout>
+      </Common.VStack>
+
+      {dayPostsModal.isModal && (
+        <DayPostsModal
+          month={param.monthId}
+          day={selectedDay}
+          handleCloseModal={dayPostsModal.handleCloseModal}
+        />
+      )}
+    </Common.Layout>
   );
 }
