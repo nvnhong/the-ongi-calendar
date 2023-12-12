@@ -1,6 +1,5 @@
 import Layout from "@components/common/Layout";
 import VStack from "@components/common/VStack";
-import HStack from "@components/common/HStack";
 import TextBox from "@components/common/TextBox";
 import { getMonthAndDay } from "@utils/dateUtil";
 import useInput from "@hooks/useInput";
@@ -9,10 +8,11 @@ import usePostUpdate from "@hooks/usePostUpdate";
 import usePostDelete from "@hooks/usePostDelete";
 import { Button, TextField } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 export default function PostPage() {
+  const navigate = useNavigate();
   const { state: postData } = useLocation();
 
   const { values, setValues, handleChange } = useInput({
@@ -42,7 +42,7 @@ export default function PostPage() {
           {postData ? "소망 수정하기" : "소망 작성하기"}
         </TextBox>
 
-        <HStack className="gap-1">
+        <VStack>
           <TextField
             helperText={`닉네임은 10자 이내로 작성해주세요. (${values.nickname.length}/10자)`}
             name="nickname"
@@ -50,10 +50,10 @@ export default function PostPage() {
             onChange={handleChange}
             label="닉네임"
           />
-          <Button variant="contained" className="h-[56px]">
-            랜덤
-          </Button>
-        </HStack>
+          <TextBox className="font-normal text-[12px] text-[#666] mx-[14px]">
+            닉네임 미작성 시 랜덤으로 닉네임이 생성됩니다.
+          </TextBox>
+        </VStack>
 
         <DatePicker
           label={"날짜를 선택하세요"}
@@ -97,6 +97,13 @@ export default function PostPage() {
             </Button>
           )}
         </VStack>
+
+        <TextBox
+          onClick={() => navigate(-1)}
+          className="text-center text-gray-600 text-[14px] font-semibold cursor-pointer"
+        >
+          이전 페이지로 돌아가기
+        </TextBox>
       </VStack>
     </Layout>
   );
