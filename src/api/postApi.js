@@ -24,5 +24,5 @@ export const getDailyPosts = async (month, day) => {
   const response = await axiosInstance.get(
     `/api/year-end/month/${month}/day/${day}`
   );
-  return response;
+  return response.data;
 };
