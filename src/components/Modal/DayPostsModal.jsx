@@ -4,10 +4,21 @@ import useDailyPost from "@hooks/useDailyPost";
 import { Close } from "@assets/Icon";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { getCookie as isLogin } from "@utils/cookieUtil";
 
 export default function DayPostsModal({ month, day, handleCloseModal }) {
   const navigate = useNavigate();
   const { dailyPost, isLoading } = useDailyPost(month, day);
+
+  const handleCreatePostClick = () => {
+    if (!isLogin()) {
+      navigate("/login");
+    } else {
+      navigate("/post", {
+        state: { month, day, state: "create" },
+      });
+    }
+  };
 
   if (isLoading) {
     return (
@@ -40,14 +51,7 @@ export default function DayPostsModal({ month, day, handleCloseModal }) {
               <p>작성된 소망이 없습니다.</p>
               <p>아래 버튼을 눌러 소망을 채워주세요</p>
             </div>
-            <Button
-              variant="contained"
-              onClick={() =>
-                navigate("/post", {
-                  state: { month, day, state: "create" },
-                })
-              }
-            >
+            <Button variant="contained" onClick={handleCreatePostClick}>
               소망 작성하기
             </Button>
           </div>
