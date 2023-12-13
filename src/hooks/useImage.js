@@ -9,8 +9,8 @@ export default function useImage() {
   const handleImageChange = (e) => {
     const selectedImage = e.target.files[0];
 
-    if (selectedImage.size > 1024 * 1024) {
-      alert("이미지는 1MB 이상 업로드할 수 없습니다.");
+    if (selectedImage.size > 5 * 1024 * 1024) {
+      alert("이미지는 5MB 이상 업로드할 수 없습니다.");
       return;
     }
 
