@@ -14,6 +14,7 @@ import { useEffect } from "react";
 export default function PostPage() {
   const navigate = useNavigate();
   const { state: postData } = useLocation();
+  console.log(postData);
 
   const { values, setValues, handleChange } = useInput({
     nickname: "",
@@ -23,8 +24,14 @@ export default function PostPage() {
   });
 
   useEffect(() => {
-    if (postData) {
-      const { nickname, contents, month, day } = postData;
+    const { nickname, contents, month, day, state } = postData;
+
+    if (postData.state === "create") {
+      setValues({ ...values, month, day });
+      return;
+    }
+
+    if (postData.state === "edit") {
       setValues({ nickname, contents, month, day });
     }
   }, [postData]);
@@ -79,15 +86,15 @@ export default function PostPage() {
           <Button
             variant="contained"
             onClick={
-              postData
+              postData.state === "edit"
                 ? () => postUpdateMutation.mutate(values)
                 : () => postUploadMutation.mutate(values)
             }
           >
-            {postData ? "수정" : "등록"}
+            {postData.state === "edit" ? "수정" : "등록"}
           </Button>
 
-          {postData && (
+          {postData.state === "edit" && (
             <Button
               variant="contained"
               color="error"

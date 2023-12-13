@@ -51,7 +51,11 @@ export default function MyPage() {
           <List
             key={data.id}
             value={data}
-            onListClick={() => navigate(`/post/${data.id}`, { state: data })}
+            onListClick={() =>
+              navigate(`/post/${data.id}`, {
+                state: { ...data, state: "edit" },
+              })
+            }
           />
         ))}
       </VStack>

@@ -1,9 +1,12 @@
 import Loading from "@components/common/Loading";
 import VStack from "@components/common/VStack";
-import useDailyPost from "../../hooks/useDailyPost";
-import { Close } from "../../assets/Icon";
+import useDailyPost from "@hooks/useDailyPost";
+import { Close } from "@assets/Icon";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export default function DayPostsModal({ month, day, handleCloseModal }) {
+  const navigate = useNavigate();
   const { dailyPost, isLoading } = useDailyPost(month, day);
 
   if (isLoading) {
@@ -30,6 +33,25 @@ export default function DayPostsModal({ month, day, handleCloseModal }) {
             <Close />
           </span>
         </div>
+
+        {dailyPost.length === 0 && (
+          <div className="flex flex-col p-3 gap-4">
+            <div className="flex flex-col items-center justify-center gap-1 text-[14px] text-gray-600 p-2">
+              <p>작성된 소망이 없습니다.</p>
+              <p>아래 버튼을 눌러 소망을 채워주세요</p>
+            </div>
+            <Button
+              variant="contained"
+              onClick={() =>
+                navigate("/post", {
+                  state: { month, day, state: "create" },
+                })
+              }
+            >
+              소망 작성하기
+            </Button>
+          </div>
+        )}
 
         <div className="max-h-[calc(500px-50px)] overflow-y-auto scrollbar-hide mx-2 text-[14px] tracking-wider">
           {dailyPost.map((post, index) => (
