@@ -37,7 +37,7 @@ export default function MonthPage() {
               <Link to="/post">소망 작성</Link>
             </Button>
             <Button variant="contained">
-              <Link to="/photo">이미지 업로드</Link>
+              <Link to={`/photo/${param.monthId}`}>이미지 업로드</Link>
             </Button>
           </Common.HStack>
         )}
