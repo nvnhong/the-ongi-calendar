@@ -4,7 +4,7 @@ import useDailyPost from "@hooks/useDailyPost";
 import { Close } from "@assets/Icon";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { getCookie as isLogin } from "@utils/cookieUtil";
+import { isCookie as isLogin } from "@utils/cookieUtil";
 
 export default function DayPostsModal({ month, day, handleCloseModal }) {
   const navigate = useNavigate();
