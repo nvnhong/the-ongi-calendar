@@ -1,6 +1,7 @@
 import Layout from "@components/common/Layout";
 import TextBox from "@components/common/TextBox";
 import VStack from "@components/common/VStack";
+import Loading from "@components/common/Loading";
 import useImage from "@hooks/useImage";
 import ImagePlaceholder from "@assets/image_placeholder.png";
 import useImageUpload from "@hooks/useImageUpload";
@@ -11,6 +12,14 @@ export default function ImageUplaodPage() {
   const { monthId } = useParams();
   const { image, previewImage, inputRef, handleImageChange } = useImage();
   const imageUploadMutation = useImageUpload(monthId, image);
+
+  if (imageUploadMutation.isPending) {
+    return (
+      <>
+        <Loading alt="upload" />
+      </>
+    );
+  }
 
   return (
     <Layout>
