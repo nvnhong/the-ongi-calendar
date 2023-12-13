@@ -14,7 +14,6 @@ import { useEffect } from "react";
 export default function PostPage() {
   const navigate = useNavigate();
   const { state: postData } = useLocation();
-  console.log(postData);
 
   const { values, setValues, handleChange } = useInput({
     nickname: "",
@@ -46,7 +45,7 @@ export default function PostPage() {
     <Layout>
       <VStack className="h-screen gap-5 px-4 justify-center">
         <TextBox className="text-[20px] text-center font-bold">
-          {postData ? "소망 수정하기" : "소망 작성하기"}
+          {postData.state === "edit" ? "소망 수정하기" : "소망 작성하기"}
         </TextBox>
 
         <VStack>

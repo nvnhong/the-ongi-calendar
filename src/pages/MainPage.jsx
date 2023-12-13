@@ -20,11 +20,13 @@ export default function MainPage() {
   return (
     <Layout>
       <Header />
-      <TextBox className="flex flex-col gap-2 text-center py-5 border-t border-b text-[12px] italic text-gray-600">
+      <TextBox className="flex flex-col gap-2 text-center py-5 border-t border-b text-[12px] italic text-gray-600 mx-4">
         <p>" 긴 여행의 날들, 끝없는 행운만이 그대와 함께이길 "</p>
         <p>페퍼톤스, 행운을 빌어요</p>
         <p className="not-italic text-black">
-          2024년에 꼭 이루고 싶은 소망과 나누고 싶은 이미지를 올려주세요.
+          2024년에 <span className="font-semibold">꼭 이루고 싶은 소망</span>과{" "}
+          <span className="font-semibold">나누고 싶은 이미지</span>를
+          올려주세요.
         </p>
       </TextBox>
       <section className="grid grid-cols-3 gap-1 mx-1 py-3">
