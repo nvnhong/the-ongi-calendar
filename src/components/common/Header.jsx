@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <header className="h-[60px] flex justify-between items-center px-4">
       <h1 className="text-[20px] font-bold">
-        <Link to="/">더온기 캘린더</Link>
+        <Link to="/">2024 소망 달력</Link>
       </h1>
 
       {isLogin() ? (
