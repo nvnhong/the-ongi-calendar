@@ -21,6 +21,10 @@ export default function ImageUplaodPage() {
     );
   }
 
+  if (imageUploadMutation.error) {
+    return <Layout>{error}</Layout>;
+  }
+
   return (
     <Layout>
       <VStack className="h-screen justify-center gap-5 mx-4">
