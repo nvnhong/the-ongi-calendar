@@ -21,7 +21,14 @@ export const getMonthDetails = (monthId) => {
 export const getMonthDate = (monthDetails) => {
   const dateArray = [];
   let day = monthDetails.startDate;
+  // console.log({ day }); // 여기서 day의 month와 monthDatils.month가 다를 경우 ''로 push
+  // console.log(day.getMonth() + 1);
   while (differenceInCalendarDays(monthDetails.endDate, day) >= 0) {
+    // if (day.getMonth() + 1 !== monthDetails.month) {
+    //   dateArray.push("");
+    // } else {
+    //   dateArray.push(day);
+    // }
     dateArray.push(day);
     day = addDays(day, 1);
   }
