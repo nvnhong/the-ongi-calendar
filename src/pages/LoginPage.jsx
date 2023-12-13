@@ -22,7 +22,7 @@ export default function LoginPage() {
     <Layout>
       <VStack className="h-screen justify-center gap-5 px-4">
         <TextBox className="text-[20px] text-center font-bold">
-          더온기 캘린더 로그인
+          2024 소망 달력
         </TextBox>
 
         <TextField
@@ -72,7 +72,7 @@ export default function LoginPage() {
             validateName(values.username) || validatePhone(values.phoneNum)
           }
         >
-          로그인
+          입장하기
         </Button>
 
         <TextBox

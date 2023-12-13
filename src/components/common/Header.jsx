@@ -4,8 +4,8 @@ import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
 
 export default function Header() {
   return (
-    <header className="h-[60px] flex justify-between items-center px-4">
-      <h1 className="text-[20px] font-bold">
+    <header className="flex justify-between items-center p-4">
+      <h1 className="text-[24px] font-bold">
         <Link to="/">2024 소망 달력</Link>
       </h1>
 
@@ -21,7 +21,7 @@ export default function Header() {
           to="/login"
           className="border py-2 px-3 rounded-lg bg-blue-500 text-white font-semibold"
         >
-          로그인
+          입장하기
         </Link>
       )}
     </header>
