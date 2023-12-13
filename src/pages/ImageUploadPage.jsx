@@ -22,7 +22,7 @@ export default function ImageUplaodPage() {
   }
 
   if (imageUploadMutation.error) {
-    return <Layout>{error}</Layout>;
+    return <Layout>{imageUploadMutation.error}</Layout>;
   }
 
   return (

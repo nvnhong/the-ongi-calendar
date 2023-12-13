@@ -9,6 +9,8 @@ import { Link } from "react-router-dom";
 export default function MainPage() {
   const { yearlyImages, isLoading } = useYearlyImages();
 
+  console.log(yearlyImages);
+
   if (isLoading) {
     return (
       <>
@@ -31,7 +33,7 @@ export default function MainPage() {
             className="relative overflow-hidden text-center"
           >
             <img
-              src={yearlyImages[index][0].photoURL}
+              src={yearlyImages[index].photoURL}
               className="w-full h-[100px] object-cover opacity-100 blur-[1px]"
             />
             <span className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-50  w-full h-full flex items-center justify-center bg-white/30 font-normal text-[18px] tracking-widest text-gray-600">
