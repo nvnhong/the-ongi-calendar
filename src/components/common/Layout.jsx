@@ -11,7 +11,7 @@ export default function Layout({ children }) {
   return (
     <div
       className={`w-[360px] h-screen mx-auto bg-white ${
-        isHeaderPresent && "pt-[60px]"
+        isHeaderPresent && "pt-[80px]"
       }`}
     >
       <div>{children}</div>

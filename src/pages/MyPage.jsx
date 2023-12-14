@@ -19,7 +19,7 @@ export default function MyPage() {
     queries: [
       { queryKey: ["user"], queryFn: getUserInfo },
       { queryKey: ["post"], queryFn: getUserPost },
-      { queryKey: ["image"], queryFn: getUserImages },
+      { queryKey: ["userImage"], queryFn: getUserImages },
     ],
   });
 
