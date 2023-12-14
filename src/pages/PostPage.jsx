@@ -23,15 +23,21 @@ export default function PostPage() {
   });
 
   useEffect(() => {
-    const { nickname, contents, month, day, state } = postData;
-
-    if (postData.state === "create") {
-      setValues({ ...values, month, day });
+    if (!postData) {
       return;
     }
 
-    if (postData.state === "edit") {
-      setValues({ nickname, contents, month, day });
+    if (postData) {
+      const { nickname, contents, month, day, state } = postData;
+
+      if (state === "create") {
+        setValues({ ...values, month, day });
+        return;
+      }
+
+      if (state === "edit") {
+        setValues({ nickname, contents, month, day });
+      }
     }
   }, [postData]);
 
@@ -45,7 +51,7 @@ export default function PostPage() {
     <Layout>
       <VStack className="h-screen gap-5 px-4 justify-center">
         <TextBox className="text-[20px] text-center font-bold">
-          {postData.state === "edit" ? "소망 수정하기" : "소망 작성하기"}
+          {postData?.state === "edit" ? "소망 수정하기" : "소망 작성하기"}
         </TextBox>
 
         <VStack>
@@ -85,15 +91,15 @@ export default function PostPage() {
           <Button
             variant="contained"
             onClick={
-              postData.state === "edit"
+              postData?.state === "edit"
                 ? () => postUpdateMutation.mutate(values)
                 : () => postUploadMutation.mutate(values)
             }
           >
-            {postData.state === "edit" ? "수정" : "등록"}
+            {postData?.state === "edit" ? "수정" : "등록"}
           </Button>
 
-          {postData.state === "edit" && (
+          {postData?.state === "edit" && (
             <Button
               variant="contained"
               color="error"
