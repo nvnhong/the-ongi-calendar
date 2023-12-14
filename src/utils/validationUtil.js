@@ -8,3 +8,18 @@ export const validateName = (name) => {
 export const validatePhone = (phone) => {
   return !/^\d{4}$/.test(phone);
 };
+
+export const validatePost = (values) => {
+  console.log(values);
+  const { contents, month, day } = values;
+
+  if (
+    contents.trim() === "" ||
+    String(month).trim() === "" ||
+    String(day).trim() === ""
+  ) {
+    return false;
+  }
+
+  return true;
+};

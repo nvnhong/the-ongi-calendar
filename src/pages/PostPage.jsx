@@ -10,6 +10,7 @@ import { Button, TextField } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { validatePost } from "@utils/validationUtil";
 
 export default function PostPage() {
   const navigate = useNavigate();
@@ -61,6 +62,7 @@ export default function PostPage() {
             value={values.nickname}
             onChange={handleChange}
             label="닉네임"
+            inputProps={{ maxLength: 10 }}
           />
           <TextBox className="font-normal text-[12px] text-[#666] mx-[14px]">
             닉네임 미작성 시 랜덤으로 닉네임이 생성됩니다.
@@ -85,11 +87,13 @@ export default function PostPage() {
           value={values.contents}
           onChange={handleChange}
           label="내용"
+          inputProps={{ maxLength: 20 }}
         />
 
         <VStack className="gap-2">
           <Button
             variant="contained"
+            disabled={!validatePost(values)}
             onClick={
               postData?.state === "edit"
                 ? () => postUpdateMutation.mutate(values)
@@ -102,6 +106,7 @@ export default function PostPage() {
           {postData?.state === "edit" && (
             <Button
               variant="contained"
+              disabled={!validatePost(values)}
               color="error"
               onClick={() => postDeleteMutation.mutate(postData.id)}
             >
