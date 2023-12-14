@@ -32,6 +32,8 @@ export default function MainPage() {
     );
   }
 
+  console.log(yearlyImages);
+
   return (
     <Layout>
       <Header />
@@ -61,12 +63,12 @@ export default function MainPage() {
       <section className="grid grid-cols-3 gap-1 mx-1">
         {MONTHS.map((month, index) => (
           <Link
-            key={month}
+            key={index}
             to={`/month/${month}`}
-            className="relative overflow-hidden text-center"
+            className="relative overflow-hidden text-center border-none"
           >
             <img
-              src={yearlyImages[index].photoURL}
+              src={yearlyImages[index]?.photoURL}
               className="w-full h-[100px] object-cover"
             />
             <span className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] z-50 font-semibold text-white text-[18px] tracking-widest drop-shadow-[0_0_7px_rgba(8,36,36,0.7)]">
