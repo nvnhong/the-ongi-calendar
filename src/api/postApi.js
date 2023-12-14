@@ -30,3 +30,8 @@ export const getDailyPosts = async (month, day) => {
   );
   return response.data;
 };
+
+export const getRandomSaying = async () => {
+  const response = await axiosInstance.get("/api/saying");
+  return response.data;
+};

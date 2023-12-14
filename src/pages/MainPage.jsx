@@ -4,13 +4,25 @@ import TextBox from "@components/common/TextBox";
 import Loading from "@components/common/Loading";
 import HStack from "@components/common/HStack";
 import { MONTHS } from "@constants/dateConstants";
-import useYearlyImages from "@hooks/useYearlyImages";
 import { isCookie as isLogin } from "@utils/cookieUtil";
 import { Button } from "@mui/material";
+import { getImages } from "@api/photoApi";
 import { Link } from "react-router-dom";
+import { useQueries } from "@tanstack/react-query";
+import { getRandomSaying } from "@api/postApi";
 
 export default function MainPage() {
-  const { yearlyImages, isLoading } = useYearlyImages();
+  const queries = useQueries({
+    queries: [
+      { queryKey: ["image"], queryFn: getImages },
+      { queryKey: ["saying"], queryFn: getRandomSaying },
+    ],
+  });
+
+  const [yearlyImagesQuery, sayingQuery] = queries;
+  const yearlyImages = yearlyImagesQuery.data;
+  const saying = sayingQuery.data;
+  const isLoading = queries.some((query) => query.isLoading);
 
   if (isLoading) {
     return (
@@ -24,8 +36,8 @@ export default function MainPage() {
     <Layout>
       <Header />
       <TextBox className="flex flex-col gap-2 text-center py-5 border-t border-b text-[12px] italic text-gray-600 mx-4">
-        <p>" 긴 여행의 날들, 끝없는 행운만이 그대와 함께이길 "</p>
-        <p>페퍼톤스, 행운을 빌어요</p>
+        <p>" {saying.saying} "</p>
+        <p>{saying.singer}</p>
         <p className="not-italic text-black">
           2024년에 <span className="font-semibold">꼭 이루고 싶은 소망</span>과{" "}
           <span className="font-semibold">나누고 싶은 이미지</span>를

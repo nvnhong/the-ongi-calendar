@@ -18,8 +18,8 @@ export default function MyPage() {
   const quries = useQueries({
     queries: [
       { queryKey: ["user"], queryFn: getUserInfo },
-      { queryKey: ["userPost"], queryFn: getUserPost },
-      { queryKey: ["userImage"], queryFn: getUserImages },
+      { queryKey: ["post"], queryFn: getUserPost },
+      { queryKey: ["image"], queryFn: getUserImages },
     ],
   });
 
