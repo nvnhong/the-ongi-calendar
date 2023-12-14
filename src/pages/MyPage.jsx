@@ -1,12 +1,13 @@
-import Layout from "@components/common/Layout";
-import Header from "@components/common/Header";
-import VStack from "@components/common/VStack";
-import TextBox from "@components/common/TextBox";
-import List from "@components/common/List";
+import Common from "@components/common";
 import { useQueries } from "@tanstack/react-query";
+import { getUserImages } from "@api/photoApi";
 import { getUserInfo, getUserPost, logout } from "@api/userApi";
 import { Button } from "@mui/material";
-import Loading from "@components/common/Loading";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useNavigate } from "react-router-dom";
 
 export default function MyPage() {
@@ -15,50 +16,84 @@ export default function MyPage() {
     queries: [
       { queryKey: ["user"], queryFn: getUserInfo },
       { queryKey: ["userPost"], queryFn: getUserPost },
+      { queryKey: ["userImage"], queryFn: getUserImages },
     ],
   });
 
-  const [userInfoQuery, userPostQuery] = quries;
+  const [userInfoQuery, userPostQuery, userImageQuery] = quries;
   const userInfo = userInfoQuery.data;
   const userPost = userPostQuery.data;
+  const userImage = userImageQuery.data;
   const isLoading = quries.some((query) => query.isLoading);
 
   if (isLoading) {
     return (
       <>
-        <Loading />
+        <Common.Loading />
       </>
     );
   }
 
   return (
-    <Layout>
-      <Header />
+    <Common.Layout>
+      <Common.Header />
 
-      <VStack className="justify-center items-center gap-2 py-4">
-        <TextBox className="flex justify-center items-center text-[18px] font-semibold">{`${userInfo.username}(${userInfo.phoneNum})`}</TextBox>
+      <Common.VStack className="justify-center items-center gap-2 py-4">
+        <Common.TextBox className="flex justify-center items-center text-[18px] font-semibold">{`${userInfo.username}(${userInfo.phoneNum})`}</Common.TextBox>
         <Button variant="outlined" className="h-[26px]" onClick={logout}>
           로그아웃
         </Button>
-      </VStack>
+      </Common.VStack>
 
-      <TextBox className="py-3 flex justify-center items-center font-semibold bg-gray-100 my-1">
-        {`작성한 소망 개수 ${userPost.length} / 5개`}
-      </TextBox>
-
-      <VStack className="mx-1">
-        {userPost.map((data) => (
-          <List
-            key={data.id}
-            value={data}
-            onListClick={() =>
-              navigate(`/post/${data.id}`, {
-                state: { ...data, state: "edit" },
-              })
-            }
-          />
-        ))}
-      </VStack>
-    </Layout>
+      <div className="py-4">
+        <Accordion>
+          <AccordionSummary
+            sx={{ bgcolor: "#f3f4f6" }}
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Common.TextBox className="font-semibold">{`작성한 소망 개수 ${userPost.length} / 5개`}</Common.TextBox>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Common.VStack className="mx-1">
+              {userPost.map((data) => (
+                <Common.List
+                  key={data.id}
+                  value={data}
+                  onListClick={() =>
+                    navigate(`/post/${data.id}`, {
+                      state: { ...data, state: "edit" },
+                    })
+                  }
+                />
+              ))}
+            </Common.VStack>
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary
+            sx={{ bgcolor: "#f3f4f6" }}
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel2a-content"
+            id="panel2a-header"
+          >
+            <Common.TextBox className="font-semibold">{`업로드한 이미지 개수 ${userPost.length}개`}</Common.TextBox>
+          </AccordionSummary>
+          <AccordionDetails>
+            <div className="grid grid-cols-3 ">
+              {userImage.map((data, index) => (
+                <div key={index} className="h-[100px]">
+                  <img
+                    src={data.photoURL}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+          </AccordionDetails>
+        </Accordion>
+      </div>
+    </Common.Layout>
   );
 }
