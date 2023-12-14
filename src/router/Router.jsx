@@ -18,6 +18,6 @@ export const router = createBrowserRouter([
   { path: "login", element: <LoginPage /> },
   { path: "post", element: <PostPage /> },
   { path: "post/:postId", element: <PostPage /> },
-  { path: "photo/:monthId", element: <ImageUplaodPage /> },
+  { path: "photo", element: <ImageUplaodPage /> },
   { path: "mypage", element: <MyPage /> },
 ]);

@@ -3,8 +3,6 @@ import Calendar from "@components/calendar";
 import DayPostsModal from "@components/Modal/DayPostsModal";
 import useModal from "@hooks/useModal";
 import { getMonthDate, getMonthDetails } from "@utils/dateUtil";
-import { isCookie as isLogin } from "@utils/cookieUtil";
-import { Button } from "@mui/material";
 import { Link, useParams } from "react-router-dom";
 import { useState } from "react";
 import { useQueries } from "@tanstack/react-query";
@@ -46,19 +44,6 @@ export default function MonthPage() {
   return (
     <Common.Layout>
       <Common.Header />
-
-      <Common.HStack className="justify-end items-center border py-2">
-        {isLogin() && (
-          <Common.HStack className="gap-2">
-            <Button variant="contained">
-              <Link to="/post">소망 작성</Link>
-            </Button>
-            <Button variant="contained">
-              <Link to={`/photo/${param.monthId}`}>이미지 업로드</Link>
-            </Button>
-          </Common.HStack>
-        )}
-      </Common.HStack>
 
       {/* 이달의 사진 표시 */}
       <Common.ImageSlider imageList={monthlyImages} />

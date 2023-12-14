@@ -2,8 +2,11 @@ import Layout from "@components/common/Layout";
 import Header from "@components/common/Header";
 import TextBox from "@components/common/TextBox";
 import Loading from "@components/common/Loading";
+import HStack from "@components/common/HStack";
 import { MONTHS } from "@constants/dateConstants";
 import useYearlyImages from "@hooks/useYearlyImages";
+import { isCookie as isLogin } from "@utils/cookieUtil";
+import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export default function MainPage() {
@@ -29,7 +32,21 @@ export default function MainPage() {
           올려주세요.
         </p>
       </TextBox>
-      <section className="grid grid-cols-3 gap-1 mx-1 py-3">
+
+      <HStack className="justify-center items-center py-4 ">
+        {isLogin() && (
+          <HStack className="gap-2 text-[14px] font-semibold">
+            <Button variant="contained">
+              <Link to="/post">소망 작성 하기</Link>
+            </Button>
+            <Button variant="contained">
+              <Link to={`/photo`}>이미지 업로드 하기</Link>
+            </Button>
+          </HStack>
+        )}
+      </HStack>
+
+      <section className="grid grid-cols-3 gap-1 mx-1">
         {MONTHS.map((month, index) => (
           <Link
             key={month}

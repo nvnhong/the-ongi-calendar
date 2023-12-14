@@ -3,15 +3,16 @@ import TextBox from "@components/common/TextBox";
 import VStack from "@components/common/VStack";
 import Loading from "@components/common/Loading";
 import useImage from "@hooks/useImage";
+import { MONTHS } from "@constants/dateConstants";
 import ImagePlaceholder from "@assets/image_placeholder.png";
 import useImageUpload from "@hooks/useImageUpload";
 import { Button } from "@mui/material";
-import { useParams } from "react-router-dom";
+import { useState } from "react";
 
 export default function ImageUplaodPage() {
-  const { monthId } = useParams();
+  const [month, setMonth] = useState(null);
   const { image, previewImage, inputRef, handleImageChange } = useImage();
-  const imageUploadMutation = useImageUpload(monthId, image);
+  const imageUploadMutation = useImageUpload(month, image);
 
   if (imageUploadMutation.isPending) {
     return (
@@ -36,6 +37,28 @@ export default function ImageUplaodPage() {
           <p>업로드 시 이미지는 메인 화면에 즉시 적용됩니다.</p>
         </TextBox>
 
+        <VStack className="gap-2">
+          <TextBox className="font-semibold text-gray-600">
+            월 선택 <span className="font-semibold text-red-600">*</span>
+          </TextBox>
+          <div className="grid grid-cols-6 gap-1">
+            {MONTHS.map((number) => (
+              <button
+                key={number}
+                className={`flex justify-center items-center py-1 border rounded-md ${
+                  month === number && "text-white font-bold bg-[#1876d1]"
+                }`}
+                onClick={() => setMonth(number)}
+              >
+                {number}
+              </button>
+            ))}
+          </div>
+        </VStack>
+
+        <TextBox className="font-semibold text-gray-600">
+          이미지 선택 <span className="font-semibold text-red-600">*</span>
+        </TextBox>
         <VStack
           className="w-[200px] h-[200px] gap-4 justify-center items-center bg-gray-100 rounded-xl mx-auto"
           onClick={() => inputRef.current.click()}
@@ -66,19 +89,21 @@ export default function ImageUplaodPage() {
           )}
         </VStack>
 
-        {image && (
-          <Button variant="outlined" onClick={() => inputRef.current.click()}>
-            이미지 다시 선택하기
-          </Button>
-        )}
+        <VStack className="gap-2">
+          {image && (
+            <Button variant="outlined" onClick={() => inputRef.current.click()}>
+              이미지 다시 선택하기
+            </Button>
+          )}
 
-        <Button
-          variant="contained"
-          disabled={!image}
-          onClick={() => imageUploadMutation.mutate(monthId, image)}
-        >
-          이미지 업로드
-        </Button>
+          <Button
+            variant="contained"
+            disabled={!image || !month}
+            onClick={() => imageUploadMutation.mutate(month, image)}
+          >
+            이미지 업로드
+          </Button>
+        </VStack>
       </VStack>
     </Layout>
   );

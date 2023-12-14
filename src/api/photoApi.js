@@ -21,3 +21,8 @@ export const getMonthlyImages = async (monthId) => {
   const response = await axiosInstance.get(`/api/photo/month/${monthId}`);
   return response.data;
 };
+
+export const getUserImages = async () => {
+  const response = await axiosInstance.get("/api/photo/user-photo");
+  return response.data;
+};
