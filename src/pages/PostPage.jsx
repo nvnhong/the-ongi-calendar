@@ -71,8 +71,8 @@ export default function PostPage() {
 
         <DatePicker
           label={"날짜를 선택하세요"}
-          views={["month", "day"]}
           name="date"
+          format="MM월 dd일"
           value={postData && new Date(2024, values.month - 1, values.day)}
           onChange={(newValue) =>
             setValues({ ...values, ...getMonthAndDay(newValue) })
