@@ -26,3 +26,8 @@ export const getUserImages = async () => {
   const response = await axiosInstance.get("/api/photo/user-photo");
   return response.data;
 };
+
+export const deleteImage = async (imageId) => {
+  const response = await axiosInstance.delete(`/api/photo/${imageId}`);
+  return response;
+};
