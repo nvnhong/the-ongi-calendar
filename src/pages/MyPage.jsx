@@ -73,7 +73,7 @@ export default function MyPage() {
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Common.TextBox className="font-semibold">{`작성한 소망 개수 ${userPost.length} / 5개`}</Common.TextBox>
+            <Common.TextBox className="font-semibold">{`작성한 소망 개수 ${userPost.length}개`}</Common.TextBox>
           </AccordionSummary>
           <AccordionDetails>
             <Common.VStack className="mx-1">

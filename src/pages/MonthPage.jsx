@@ -3,7 +3,7 @@ import Calendar from "@components/calendar";
 import DayPostsModal from "@components/Modal/DayPostsModal";
 import useModal from "@hooks/useModal";
 import { getMonthDate, getMonthDetails } from "@utils/dateUtil";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { useQueries } from "@tanstack/react-query";
 import { getMonthlyPosts } from "@api/postApi";
@@ -85,7 +85,10 @@ export default function MonthPage() {
         {monthlyPosts.length > 0 && (
           <Common.TextBox>
             <span className="font-semibold">최근 등록된 소망</span> :{" "}
-            {monthlyPosts[monthlyPosts.length - 1].contents}
+            {monthlyPosts[monthlyPosts.length - 1].contents} (
+            {monthlyPosts[monthlyPosts.length - 1].nickname} /{" "}
+            {monthlyPosts[monthlyPosts.length - 1].month}월{" "}
+            {monthlyPosts[monthlyPosts.length - 1].day}일)
           </Common.TextBox>
         )}
         <Common.TextBox>

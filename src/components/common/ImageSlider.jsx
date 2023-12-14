@@ -17,7 +17,7 @@ export default function ImageSlider({ imageList }) {
             slidesperview={3}
           >
             <div className="absolute top-2 right-2 bg-black/30 px-2 rounded-md text-white font-semibold">
-              {index + 1}
+              {index + 1} / {imageList.length}
             </div>
             <img
               src={image.photoURL}
