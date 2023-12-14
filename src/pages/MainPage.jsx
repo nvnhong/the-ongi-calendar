@@ -32,8 +32,6 @@ export default function MainPage() {
     );
   }
 
-  console.log(yearlyImages);
-
   return (
     <Layout>
       <Header />
@@ -47,8 +45,8 @@ export default function MainPage() {
         </p>
       </TextBox>
 
-      <HStack className="justify-center items-center py-4 ">
-        {isLogin() && (
+      {isLogin() ? (
+        <HStack className="justify-center items-center py-4">
           <HStack className="gap-2 text-[14px] font-semibold">
             <Button variant="contained">
               <Link to="/post">소망 작성 하기</Link>
@@ -57,8 +55,10 @@ export default function MainPage() {
               <Link to={`/photo`}>이미지 업로드 하기</Link>
             </Button>
           </HStack>
-        )}
-      </HStack>
+        </HStack>
+      ) : (
+        <div className="h-2"></div>
+      )}
 
       <section className="grid grid-cols-3 gap-1 mx-1">
         {MONTHS.map((month, index) => (

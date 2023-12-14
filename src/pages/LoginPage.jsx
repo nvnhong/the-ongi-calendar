@@ -20,10 +20,20 @@ export default function LoginPage() {
 
   return (
     <Layout>
-      <VStack className="h-screen justify-center gap-5 px-4">
+      <VStack className="h-screen justify-center gap-5 px-2">
         <TextBox className="text-[20px] text-center font-bold">
           2024 소망 달력
         </TextBox>
+
+        <VStack className="text-gray-600 text-[14px] bg-gray-100 px-2 py-2 rounded-lg gap-2">
+          <p className="text-justify w-full ">
+            • 실명과 핸드폰 끝 번호 네 자리를 정확하게 기입해 주세요.
+          </p>
+
+          <p className="text-justify w-full">
+            • 개인정보는 서비스 종료 시 모두 폐기됩니다.
+          </p>
+        </VStack>
 
         <TextField
           required
@@ -50,12 +60,12 @@ export default function LoginPage() {
           error={validatePhone(values.phoneNum)}
           helperText={
             validatePhone(values.phoneNum) &&
-            "핸드폰 뒷자리 4자리를 입력해주세요"
+            "핸드폰 끝 번호 4자리를 입력해주세요"
           }
           name="phoneNum"
           value={values.phoneNum}
           onChange={handleChange}
-          label="핸드폰 (뒷번호 4자리)"
+          label="핸드폰 (끝 번호 4자리)"
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
