@@ -98,7 +98,7 @@ export default function MyPage() {
             aria-controls="panel2a-content"
             id="panel2a-header"
           >
-            <Common.TextBox className="font-semibold">{`업로드한 이미지 개수 ${userPost.length}개`}</Common.TextBox>
+            <Common.TextBox className="font-semibold">{`업로드한 이미지 개수 ${userImage.length}개`}</Common.TextBox>
           </AccordionSummary>
           <AccordionDetails>
             <div className="grid grid-cols-3">
