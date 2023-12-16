@@ -10,7 +10,7 @@ export default function Layout({ children }) {
 
   return (
     <div
-      className={`w-[360px] h-screen mx-auto bg-white ${
+      className={`w-[360px] h-auto min-h-screen mx-auto bg-white ${
         isHeaderPresent && "pt-[80px]"
       }`}
     >
