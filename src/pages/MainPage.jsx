@@ -3,15 +3,29 @@ import Header from "@components/common/Header";
 import TextBox from "@components/common/TextBox";
 import Loading from "@components/common/Loading";
 import HStack from "@components/common/HStack";
+import ServiceInfoModal from "@components/modal/ServiceInfoModal";
+import Footer from "@components/common/Footer";
 import { MONTHS } from "@constants/dateConstants";
-import { isCookie as isLogin } from "@utils/cookieUtil";
+import useModal from "@hooks/useModal";
+import { isCookie as isLogin, getCookie, setCookie } from "@utils/cookieUtil";
 import { Button } from "@mui/material";
 import { getImages } from "@api/photoApi";
 import { Link } from "react-router-dom";
 import { useQueries } from "@tanstack/react-query";
 import { getRandomSaying } from "@api/postApi";
+import { useEffect } from "react";
+import { getEndOfDay } from "@utils/dateUtil";
 
 export default function MainPage() {
+  const serviceInfoModal = useModal();
+  const isInfo = getCookie("serviceInfo");
+
+  useEffect(() => {
+    if (!isInfo) {
+      serviceInfoModal.handleOpenModal();
+    }
+  }, [isInfo]);
+
   const queries = useQueries({
     queries: [
       { queryKey: ["image"], queryFn: getImages },
@@ -23,6 +37,14 @@ export default function MainPage() {
   const yearlyImages = yearlyImagesQuery.data;
   const saying = sayingQuery.data;
   const isLoading = queries.some((query) => query.isLoading);
+
+  const handleInfoCloseClick = () => {
+    setCookie("serviceInfo", "serviceInfo", {
+      path: "/",
+      expires: getEndOfDay(),
+    });
+    serviceInfoModal.handleCloseModal();
+  };
 
   if (isLoading) {
     return (
@@ -77,6 +99,13 @@ export default function MainPage() {
           </Link>
         ))}
       </section>
+
+      {serviceInfoModal.isModal && (
+        <ServiceInfoModal
+          handleCloseModal={serviceInfoModal.handleCloseModal}
+          handleInfoCloseClick={handleInfoCloseClick}
+        />
+      )}
     </Layout>
   );
 }

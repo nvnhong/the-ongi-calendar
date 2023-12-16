@@ -21,14 +21,7 @@ export const getMonthDetails = (monthId) => {
 export const getMonthDate = (monthDetails) => {
   const dateArray = [];
   let day = monthDetails.startDate;
-  // console.log({ day }); // 여기서 day의 month와 monthDatils.month가 다를 경우 ''로 push
-  // console.log(day.getMonth() + 1);
   while (differenceInCalendarDays(monthDetails.endDate, day) >= 0) {
-    // if (day.getMonth() + 1 !== monthDetails.month) {
-    //   dateArray.push("");
-    // } else {
-    //   dateArray.push(day);
-    // }
     dateArray.push(day);
     day = addDays(day, 1);
   }
@@ -41,4 +34,10 @@ export const getMonthAndDay = (value) => {
   const month = date.getMonth() + 1;
   const day = date.getDate();
   return { month, day };
+};
+
+export const getEndOfDay = () => {
+  const currentDate = new Date();
+  currentDate.setHours(23, 59, 59, 999);
+  return currentDate;
 };
