@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
 import VStack from "@components/common/VStack";
+import TextBox from "@components/common/TextBox";
 
 export default function ServiceInfoModal({
   handleCloseModal,
@@ -28,25 +29,25 @@ export default function ServiceInfoModal({
             </p>
 
             <VStack className="text-[12px] text-gray-600 gap-[2px]  py-2">
-              <p className="flex gap-[2px]">
+              <TextBox className="flex gap-[2px]">
                 <p>*</p>
                 <p>소망 글, 이미지 업로드 횟수는 제한이 없습니다.</p>
-              </p>
-              <p className="flex gap-[2px]">
+              </TextBox>
+              <TextBox className="flex gap-[2px]">
                 <p>*</p>
                 <p>모든 달에 소망을 입력하지 않으셔도 됩니다.</p>
-              </p>
-              <p className="flex gap-[2px]">
+              </TextBox>
+              <TextBox className="flex gap-[2px]">
                 <p>*</p>
                 <p>실제 달력에는 서비스에 입력된 모두의 소망이 반영됩니다.</p>
-              </p>
-              <p className="flex gap-[2px]">
+              </TextBox>
+              <TextBox className="flex gap-[2px]">
                 <p>*</p>
                 <p>
                   실제 달력 디자인 상황에 따라 업로드된 이미지 중 일부만 활용할
                   수도 있다는 점 미리 양해 부탁드립니다.
                 </p>
-              </p>
+              </TextBox>
             </VStack>
           </VStack>
 
