@@ -8,7 +8,7 @@ export default function ServiceInfoModal({
 }) {
   return (
     <div className="fixed w-screen h-screen top-0 left-0 bg-black/50 z-50">
-      <div className="fixed max-w-[300px] max-h-[500px] top-[50%] left-[50%] bg-white translate-x-[-50%] translate-y-[-50%] rounded-lg overflow-hidden">
+      <div className="fixed min-w-[300px] max-h-[500px] top-[50%] left-[50%] bg-white translate-x-[-50%] translate-y-[-50%] rounded-lg overflow-hidden">
         <div className="h-[45px] flex justify-center items-center bg-gray-100 font-semibold">
           소망 달력 캘린더 이용 정보
         </div>
