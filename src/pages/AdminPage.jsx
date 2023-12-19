@@ -1,8 +1,32 @@
 import Layout from "@components/common/Layout";
-import { Outlet, Link, useLocation } from "react-router-dom";
+import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
+import Loading from "@components/common/Loading";
+import { getUserInfo } from "@api/userApi";
+import { useQuery } from "@tanstack/react-query";
 
 export default function AdminPage() {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  const { data, isLoading } = useQuery({
+    queryKey: ["user"],
+    queryFn: getUserInfo,
+  });
+
+  if (isLoading) {
+    return (
+      <>
+        <Loading />
+      </>
+    );
+  }
+
+  if (
+    data[import.meta.env.VITE_REACT_APP_ADMIN_V_1] !==
+    import.meta.env.VITE_REACT_APP_ADMIN_V_1
+  ) {
+    return navigate("/");
+  }
 
   return (
     <Layout>
