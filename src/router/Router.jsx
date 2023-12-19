@@ -5,6 +5,9 @@ import LoginPage from "@pages/LoginPage";
 import PostPage from "@pages/PostPage";
 import MyPage from "@pages/MyPage";
 import ImageUplaodPage from "@pages/ImageUploadPage";
+import AdminPage from "@pages/AdminPage";
+import AdminInfoPage from "@pages/AdminInfoPage";
+import AdminDetailPage from "@pages/AdminDetailPage";
 
 export const router = createBrowserRouter([
   {
@@ -20,4 +23,12 @@ export const router = createBrowserRouter([
   { path: "post/:postId", element: <PostPage /> },
   { path: "photo", element: <ImageUplaodPage /> },
   { path: "mypage", element: <MyPage /> },
+  {
+    path: "admin",
+    element: <AdminPage />,
+    children: [
+      { path: "/admin/info", element: <AdminInfoPage /> },
+      { path: "/admin/detail", element: <AdminDetailPage /> },
+    ],
+  },
 ]);
