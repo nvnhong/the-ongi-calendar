@@ -23,7 +23,7 @@ export default function AdminPage() {
 
   if (
     data[import.meta.env.VITE_REACT_APP_ADMIN_V_1] !==
-    import.meta.env.VITE_REACT_APP_ADMIN_V_1
+    import.meta.env.VITE_REACT_APP_ADMIN_V_2
   ) {
     return navigate("/");
   }
