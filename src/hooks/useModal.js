@@ -2,6 +2,7 @@ import { useState } from "react";
 
 export default function useModal() {
   const [isModal, setIsModal] = useState(false);
+  const [selectedValue, setSelectedValue] = useState(null);
 
   const handleOpenModal = () => {
     setIsModal(true);
@@ -11,5 +12,11 @@ export default function useModal() {
     setIsModal(false);
   };
 
-  return { isModal, handleOpenModal, handleCloseModal };
+  return {
+    isModal,
+    handleOpenModal,
+    handleCloseModal,
+    selectedValue,
+    setSelectedValue,
+  };
 }

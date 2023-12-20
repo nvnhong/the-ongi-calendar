@@ -3,6 +3,7 @@ import { Outlet, Link, useLocation, useNavigate } from "react-router-dom";
 import Loading from "@components/common/Loading";
 import { getUserInfo } from "@api/userApi";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 export default function AdminPage() {
   const { pathname } = useLocation();
@@ -13,19 +14,22 @@ export default function AdminPage() {
     queryFn: getUserInfo,
   });
 
+  useEffect(() => {
+    if (
+      !isLoading &&
+      data[import.meta.env.VITE_REACT_APP_ADMIN_V_1] !==
+        import.meta.env.VITE_REACT_APP_ADMIN_V_2
+    ) {
+      navigate("/");
+    }
+  }, [data, isLoading, navigate]);
+
   if (isLoading) {
     return (
       <>
         <Loading />
       </>
     );
-  }
-
-  if (
-    data[import.meta.env.VITE_REACT_APP_ADMIN_V_1] !==
-    import.meta.env.VITE_REACT_APP_ADMIN_V_2
-  ) {
-    return navigate("/");
   }
 
   return (

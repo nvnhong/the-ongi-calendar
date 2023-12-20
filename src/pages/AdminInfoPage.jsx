@@ -1,8 +1,26 @@
 import { useQuery } from "@tanstack/react-query";
 import { getInfo } from "@api/adminApi";
 import Loading from "@components/common/Loading";
+import useModal from "@hooks/useModal";
+import AdminModal from "../components/Modal/adminModal";
 
 export default function AdminInfoPage() {
+  const infoModal = useModal();
+
+  const handleInfoClick = (event) => {
+    const clickedElement = event.target;
+    const trElement = clickedElement.closest("tr");
+
+    if (trElement) {
+      const tdChildValue =
+        trElement.querySelector("td:nth-child(1)").textContent;
+      infoModal.handleOpenModal();
+      infoModal.setSelectedValue(tdChildValue);
+      return;
+    }
+    return;
+  };
+
   const { data, isLoading } = useQuery({
     queryKey: ["admin"],
     queryFn: getInfo,
@@ -32,7 +50,11 @@ export default function AdminInfoPage() {
         </thead>
         <tbody>
           {data?.map((item, index) => (
-            <tr key={index} className="cursor-pointer hover:bg-sky-100">
+            <tr
+              key={index}
+              className="cursor-pointer hover:bg-sky-100"
+              onClick={handleInfoClick}
+            >
               <td className="border text-center py-2">
                 {item[import.meta.env.VITE_REACT_APP_ADMIN_S_1]}
               </td>
@@ -43,6 +65,12 @@ export default function AdminInfoPage() {
           ))}
         </tbody>
       </table>
+      {infoModal.isModal && (
+        <AdminModal
+          value={infoModal.selectedValue}
+          handleCloseModal={infoModal.handleCloseModal}
+        />
+      )}
     </div>
   );
 }
