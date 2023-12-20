@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getInfo } from "@api/adminApi";
 import Loading from "@components/common/Loading";
 import useModal from "@hooks/useModal";
-import AdminModal from "../components/Modal/adminModal";
+import AdminModal from "../components/Modal/AdminModal";
 
 export default function AdminInfoPage() {
   const infoModal = useModal();
