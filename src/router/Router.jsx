@@ -18,7 +18,7 @@ export const router = createBrowserRouter([
     path: "month/:monthId",
     element: <MonthPage />,
   },
-  { path: "login", element: <LoginPage /> },
+  // { path: "login", element: <LoginPage /> },
   { path: "post", element: <PostPage /> },
   { path: "post/:postId", element: <PostPage /> },
   { path: "photo", element: <ImageUplaodPage /> },

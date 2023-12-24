@@ -49,11 +49,11 @@ export default function DayPostsModal({ month, day, handleCloseModal }) {
           <div className="flex flex-col p-3 gap-4">
             <div className="flex flex-col items-center justify-center gap-1 text-[14px] text-gray-600 p-2">
               <p>작성된 소망이 없습니다.</p>
-              <p>아래 버튼을 눌러 소망을 채워주세요</p>
+              {/* <p>아래 버튼을 눌러 소망을 채워주세요</p> */}
             </div>
-            <Button variant="contained" onClick={handleCreatePostClick}>
+            {/* <Button variant="contained" onClick={handleCreatePostClick}>
               소망 작성하기
-            </Button>
+            </Button> */}
           </div>
         )}
 
