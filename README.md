@@ -34,3 +34,9 @@
 - **프론트엔드** : [홍미경](https://github.com/nvnhong)
 - **백엔드** : [장지예](https://github.com/Jang-JIye)
 - **기획** : 최지연
+
+<br />
+
+### 참고링크
+- 서비스 주소 : https://the-ongi-calendar.vercel.app
+- 백엔드 깃허브 : https://github.com/Jang-JIye/yearEnd
