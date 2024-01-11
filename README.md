@@ -40,3 +40,4 @@
 ### 참고링크
 - 서비스 주소 : https://the-ongi-calendar.vercel.app
 - 백엔드 깃허브 : https://github.com/Jang-JIye/yearEnd
+- 프로젝트(기획부터 제작까지) : https://mimi-kkokko.notion.site/8e01aca0cd9146aa93cd53a603ac5da7?pvs=4
